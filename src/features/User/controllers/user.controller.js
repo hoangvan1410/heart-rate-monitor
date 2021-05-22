@@ -11,8 +11,8 @@ module.exports.signup = async (req, res) => {
     let account = await AccountRepository.findAccountByEmail(email);
     if (account === null) {
         let user = new User({
+            name: "",
             email: email,
-            password: password,
             address: "",
             phoneNumber: "",
         });
