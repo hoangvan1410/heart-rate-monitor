@@ -35,6 +35,13 @@ module.exports.signup = async (req, res) => {
             message: "signup success",
             status: 200,
         });
+    } else {
+        res.send({
+            data: null,
+            error_code: 0,
+            message: "account has exist",
+            status: 400,
+        });
     }
 };
 
