@@ -19,6 +19,10 @@ async function findAccountByEmail(email) {
     return await Account.findOne({ email: email });
 }
 
+async function update(email, otpCode) {
+    return await Account.updateOne({ email: email },{otpCode: otpCode});
+}
+
 async function active(email) {
     await Account.updateOne({ email: email},{$unset : { otpCode : ""}})
     return await Account.updateOne({ email: email},{ isActive: true });
@@ -79,4 +83,5 @@ module.exports = {
     findAccount,
     active,
     sendOTP2Mail,
+    update
 };
