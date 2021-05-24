@@ -16,7 +16,7 @@ module.exports.signup = async (req, res) => {
             name: "",
             email: email,
             address: "",
-            phoneNumber: "",
+            phoneNumber: phone,
         });
         await UserRepository.createUser(user);
 
