@@ -167,23 +167,13 @@ module.exports.resendOTP = async (req, res) => {
     else{
         let otpCode = parseInt(Math.random()*8999 + 1000);
         await AccountRepository.update(email, otpCode)
-        let isSend = await AccountRepository.sendOTP2Mail(email,account.otpCode)
-        if (isSend == true){
-            res.send({
-                data: null,
-                error_code: 0,
-                message: "Send OTP Success",
-                status: 200,
-            });
-        }
-        else{
-            res.send({
-                data: null,
-                error_code: 0,
-                message: "Send OTP failed",
-                status: 400,
-            });
-        }
+        await AccountRepository.sendOTP2Mail(email,account.otpCode)
+        res.send({
+            data: null,
+            error_code: 0,
+            message: "Send OTP Success",
+            status: 200,
+        });
     }
     
 };

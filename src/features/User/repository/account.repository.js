@@ -68,11 +68,9 @@ async function sendOTP2Mail(email,otpCode){
     transporter.sendMail(mailOptions,(error, info) => {
         if(error) {
             console.log(error)
-            return false
         }
         else{
             console.log(info)
-            return true
         }
     })
 }
