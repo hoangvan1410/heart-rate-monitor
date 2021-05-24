@@ -20,6 +20,7 @@ async function findAccountByEmail(email) {
 }
 
 async function active(email) {
+    await Account.updateOne({ email: email},{$unset : { otpCode : ""}})
     return await Account.updateOne({ email: email},{ isActive: true });
 }
 
