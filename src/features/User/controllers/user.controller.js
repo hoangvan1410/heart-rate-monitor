@@ -8,12 +8,12 @@ const e = require("express");
 module.exports.signup = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-    let name = req.body.name;
+    let phone = req.body.phoneNumber;
 
     let account = await AccountRepository.findAccountByEmail(email);
     if (account === null) {
         let user = new User({
-            name: name,
+            name: "",
             email: email,
             address: "",
             phoneNumber: "",
@@ -21,7 +21,7 @@ module.exports.signup = async (req, res) => {
         await UserRepository.createUser(user);
 
         let userId = await UserRepository.getUserIdByEmail(email);
-        let otpCode = parseInt(Math.random()*9999);
+        let otpCode = parseInt(Math.random()*8999 + 1000);
         let account = new Account({
             email: email,
             password: password,
@@ -42,7 +42,7 @@ module.exports.signup = async (req, res) => {
         res.send({
             data: null,
             error_code: 0,
-            message: "account has exist",
+            message: "Account has exist, please sign in",
             status: 400,
         });
     }
