@@ -136,6 +136,14 @@ module.exports.otp = async (req, res) => {
                     status: 200,
                 });
             }
+            else{
+                res.send({
+                    data: null,
+                    error_code: 3,
+                    message: "Incorrect OTPCode",
+                    status: 200,
+                });
+            }
             
         }
 
