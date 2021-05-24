@@ -13,12 +13,12 @@ app.use(express.json());
 
 // connect db
 mongoose.connect(
-  process.env.URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => console.log(`connect database success`)
+    process.env.URL,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    },
+    () => console.log(`connect database success`)
 );
 
 // router
@@ -27,5 +27,5 @@ app.use("/api/users", userRoute);
 // app listen
 app.set("port", process.env.PORT || 5500);
 app.listen(app.get("port"), () => {
-  console.log(`server is running at port ${app.get("port")}`);
+    console.log(`server is running at port ${app.get("port")}`);
 });
