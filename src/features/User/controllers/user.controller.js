@@ -49,7 +49,7 @@ module.exports.login = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    let account = await AccountRepository.findAccount(email, password);
+    let account = await AccountRepository.findAccountByEmail(email);
     if (account === null) {
         res.send({
             data: null,
@@ -58,15 +58,28 @@ module.exports.login = async (req, res) => {
             status: 400,
         });
     } else {
-        let user = await UserRepository.getUserByEmail(email);
-        res.send({
-            data: {
-                user: user,
-                token: jwt.createToken(user._id),
-            },
-            error_code: 1,
-            message: "login success",
-            status: 200,
-        });
+        let checkPassword = await AccountRepository.findAccount(email, password);
+        console.log("check password",checkPassword)
+        if (checkPassword === null){
+            res.send({
+                data: null,
+                error_code: 0,
+                message: "Incorrect password",
+                status: 400,
+            })
+        }
+        else{
+            let user = await UserRepository.getUserByEmail(email);
+            res.send({
+                data: {
+                    user: user,
+                    token: jwt.createToken(user._id),
+                },
+                error_code: 1,
+                message: "login success",
+                status: 200,
+            });
+        }
+        
     }
 };
