@@ -193,7 +193,7 @@ module.exports.resendOTP = async (req, res) => {
     }
     else{
         let otpCode = parseInt(Math.random()*8999 + 1000);
-        await AccountRepository.update(email, otpCode)
+        await AccountRepository.updateOTP(email, otpCode)
         await AccountRepository.sendOTP2Mail(email,otpCode)
         res.send({
             data: null,

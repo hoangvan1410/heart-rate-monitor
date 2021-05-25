@@ -86,5 +86,6 @@ module.exports = {
     findAccount,
     active,
     sendOTP2Mail,
-    update
+    updateOTP,
+    updatePassword
 };
