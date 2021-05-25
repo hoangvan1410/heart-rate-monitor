@@ -19,8 +19,13 @@ async function findAccountByEmail(email) {
     return await Account.findOne({ email: email });
 }
 
-async function update(email, otpCode) {
+async function updateOTP(email, otpCode) {
     return await Account.updateOne({ email: email },{otpCode: otpCode});
+}
+
+async function updatePassword(email, password) {
+    await Account.updateOne({ email: email},{$unset : { otpCode : ""}})
+    return await Account.updateOne({ email: email },{password: password});
 }
 
 async function active(email) {
