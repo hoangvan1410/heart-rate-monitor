@@ -224,7 +224,7 @@ module.exports.forgotPW = async (req, res) => {
         await AccountRepository.sendOTP2Mail(email,otpCode)
         res.send({
             data: null,
-            error_code: 0,
+            error_code: 4, // send otp forgot pass success
             message: "Send OTP Success",
             status: 200,
         });
