@@ -71,8 +71,8 @@ module.exports.login = async (req, res) => {
             });
         }
         else{
-            let checkPassword = await AccountRepository.findAccount(email, password);
-            if (checkPassword === null){
+            let isMatchedPassword = AccountRepository.comparePassword(password, account.password)
+            if (isMatchedPassword === null){
                 res.send({
                     data: null,
                     error_code: 0,
