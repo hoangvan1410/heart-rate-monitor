@@ -6,7 +6,7 @@ const AccountRepository = require("../repository/account.repository");
 const e = require("express");
 
 module.exports.signup = async (req, res) => {
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
     let password = req.body.password;
     let phone = req.body.phoneNumber;
 
@@ -50,7 +50,7 @@ module.exports.signup = async (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
     let password = req.body.password;
 
     let account = await AccountRepository.findAccountByEmail(email)
@@ -99,7 +99,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.otp = async (req, res) => {
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
     let password = req.body.password;
     let otpCode = req.body.otpCode;
     let caseOTP = req.body.case;
@@ -180,7 +180,7 @@ module.exports.otp = async (req, res) => {
 };
 
 module.exports.resendOTP = async (req, res) => {
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
 
     let account = await AccountRepository.findAccountByEmail(email)
 
@@ -207,7 +207,7 @@ module.exports.resendOTP = async (req, res) => {
 };
 
 module.exports.forgotPW = async (req, res) => {
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
 
     let account = await AccountRepository.findAccountByEmail(email)
 
