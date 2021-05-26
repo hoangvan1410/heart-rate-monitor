@@ -2,7 +2,7 @@ const Account = require("../models/Account");
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
-
+var bcrypt = require('bcryptjs');
 async function createAccount(account) {
     try {
         await account.save();
@@ -19,8 +19,13 @@ async function findAccountByEmail(email) {
     return await Account.findOne({ email: email });
 }
 
-async function update(email, otpCode) {
+async function updateOTP(email, otpCode) {
     return await Account.updateOne({ email: email },{otpCode: otpCode});
+}
+
+async function updatePassword(email, password) {
+    await Account.updateOne({ email: email},{$unset : { otpCode : ""}})
+    return await Account.updateOne({ email: email },{password: password});
 }
 
 async function active(email) {
@@ -75,11 +80,23 @@ async function sendOTP2Mail(email,otpCode){
     })
 }
 
+async function hashPassword(password) {
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+    return hash
+}
+
+async function comparePassword(password,hash){
+    return bcrypt.compareSync(password,hash)
+}
 module.exports = {
     createAccount,
     findAccountByEmail,
     findAccount,
     active,
     sendOTP2Mail,
-    update
+    updateOTP,
+    updatePassword,
+    hashPassword,
+    comparePassword
 };
