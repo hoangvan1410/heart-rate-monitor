@@ -85,6 +85,10 @@ async function hashPassword(password) {
     var hash = bcrypt.hashSync(password, salt);
     return hash
 }
+
+async function comparePassword(password,hash){
+    return bcrypt.compareSync(password,hash)
+}
 module.exports = {
     createAccount,
     findAccountByEmail,
@@ -93,5 +97,6 @@ module.exports = {
     sendOTP2Mail,
     updateOTP,
     updatePassword,
-    hashPassword
+    hashPassword,
+    comparePassword
 };
