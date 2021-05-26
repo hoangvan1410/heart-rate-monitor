@@ -29,6 +29,7 @@ module.exports.signup = async (req, res) => {
             otpCode: otpCode.toString(),
             isActive: false
         });
+        account.password = await AccountRepository.hashPassword(password)
         await AccountRepository.createAccount(account);
         await AccountRepository.sendOTP2Mail(email,otpCode);
 
