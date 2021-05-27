@@ -5,7 +5,14 @@ function createToken(userId) {
 }
 
 function decodeToken(token) {
-    return jwt.verify(token, process.env.TOKEN_KEY);
+    try {
+        return jwt.verify(token, process.env.TOKEN_KEY);
+    }
+    catch(err) {
+        console.log(err);
+        return 1
+    }
+    
 }
 
 module.exports = {
