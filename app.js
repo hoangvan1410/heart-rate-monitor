@@ -5,6 +5,7 @@ const cors = require("cors");
 
 // router
 const userRoute = require("./src/features/User/routes/user.route.js");
+const healthInfoRouter = require("./src/features/HealthInfo/routes/healthInfo.route.js");
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect(
 
 // router
 app.use("/api/users", userRoute);
+app.use("/api/healthinfo",healthInfoRoute);
 
 // app listen
 app.set("port", process.env.PORT || 5500);
