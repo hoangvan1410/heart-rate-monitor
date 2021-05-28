@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/rate.controller.js");
+const verifyUser = require("../../Config/middleware/verifyUser");
 
-router.post("/", controller.index);
+router.post("/", verifyUser, controller.index);
 
-router.post("/arr", controller.postArr);
+router.post("/arr", verifyUser, controller.postArr);
 
 module.exports = router;

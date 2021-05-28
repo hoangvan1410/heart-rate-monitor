@@ -6,7 +6,7 @@ module.exports.index = async (req, res) => {
     const heartRateNumber = req.body.heartRateNumber;
     const label = req.body.label;
     const createDate = new Date(req.body.createDate);
-    const userId = "";
+    const userId = req.user;
     const rate = new Rate({
         heartRateNumber: heartRateNumber,
         label: label,
@@ -18,7 +18,7 @@ module.exports.index = async (req, res) => {
 
 module.exports.postArr = async (req, res) => {
     const rates = req.body.grapValues;
-    const userId = "";
+    const userId = req.user;
     rates.forEach((rate) => {
         const heartRateNumber = rate.heartRateNumber;
         const label = rate.label;
