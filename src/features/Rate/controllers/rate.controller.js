@@ -7,14 +7,13 @@ module.exports.index = async (req, res) => {
     const label = req.body.label;
     const createDate = Date.now();
     const userId = "";
-
     const rate = new Rate({
         heartRateNumber: heartRateNumber,
         label: label,
         createDate: createDate,
         userId: userId,
     });
-    await RateRepository.addRate(rate);
+    RateRepository.addRate(rate);
 };
 
 module.exports.postArr = async (req, res) => {
@@ -30,6 +29,6 @@ module.exports.postArr = async (req, res) => {
             createDate: createDate,
             userId: userId,
         });
-        await RateRepository.addRate(newRate);
+        RateRepository.addRate(newRate);
     });
 };
