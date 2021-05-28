@@ -8,7 +8,12 @@ module.exports.index = async (req, res) => {
     const createDate = req.body.createDate;
     const userId = jwt.decodeToken(req.body.token);
 
-    const rate = new Rate(heartRateNumber, label, createDate, userId);
+    const rate = new Rate({
+        heartRateNumber: heartRateNumber,
+        label: label,
+        createDate: createDate,
+        userId: userId,
+    });
     RateRepository.addRate(rate);
 };
 
@@ -19,7 +24,12 @@ module.exports.postArr = async (req, res) => {
         const heartRateNumber = rate.heartRateNumber;
         const label = req.label;
         const createDate = req.createDate;
-        const rate = new Rate(heartRateNumber, label, createDate, userId);
+        const rate = new Rate({
+            heartRateNumber: heartRateNumber,
+            label: label,
+            createDate: createDate,
+            userId: userId,
+        });
         RateRepository.addRate(rate);
     });
-};  
+};
