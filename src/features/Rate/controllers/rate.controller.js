@@ -22,14 +22,14 @@ module.exports.postArr = async (req, res) => {
     const userId = jwt.decodeToken(req.body.token);
     rates.forEach((rate) => {
         const heartRateNumber = rate.heartRateNumber;
-        const label = req.label;
-        const createDate = req.createDate;
-        const rate = new Rate({
+        const label = rate.label;
+        const createDate = rate.createDate;
+        const newRate = new Rate({
             heartRateNumber: heartRateNumber,
             label: label,
             createDate: createDate,
             userId: userId,
         });
-        RateRepository.addRate(rate);
+        RateRepository.addRate(newRate);
     });
 };
