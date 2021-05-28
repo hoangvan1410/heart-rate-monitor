@@ -3,9 +3,9 @@ const jwt = require("../../Config/security/jwt");
 const RateRepository = require("../repository/rate.repository");
 
 module.exports.index = async (req, res) => {
-    const heartRateNumber = req.body.heartRatNumber;
+    const heartRateNumber = req.body.heartRateNumber;
     const label = req.body.label;
-    const createDate = Date.now();
+    const createDate = new Date(req.body.createDate);
     const userId = "";
     const rate = new Rate({
         heartRateNumber: heartRateNumber,
@@ -22,7 +22,7 @@ module.exports.postArr = async (req, res) => {
     rates.forEach((rate) => {
         const heartRateNumber = rate.heartRateNumber;
         const label = rate.label;
-        const createDate = rate.createDate;
+        const createDate = new Date(rate.createDate);
         const newRate = new Rate({
             heartRateNumber: heartRateNumber,
             label: label,

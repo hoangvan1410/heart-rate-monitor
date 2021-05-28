@@ -6,7 +6,7 @@ const cors = require("cors");
 // router
 const userRoute = require("./src/features/User/routes/user.route.js");
 const healthInfoRouter = require("./src/features/HealthInfo/router/healthInfo.router.js");
-const rateRoute = require("./src/features/Rate/routes/rate.route");
+const rateRoute = require("./src/features/Rate/routes/rate.route.js");
 
 dotenv.config();
 const app = express();
