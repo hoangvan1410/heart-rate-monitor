@@ -7,6 +7,7 @@ const healthInfoSchema = new mongoose.Schema(
         weight: Number,
         age: Number,
         gender: String,
+        createDate: Date
     },
     { timestamps: true }
 );
