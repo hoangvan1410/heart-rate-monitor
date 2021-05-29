@@ -32,3 +32,10 @@ module.exports.postArr = async (req, res) => {
         RateRepository.addRate(newRate);
     });
 };
+
+module.exports.getRates = async (req, res) => {
+    const userId = req.user;
+    const limitDay = req.query.limitDay;
+    const rates = RateRepository.getRates(userId, limitDay);
+    res.send(rates);
+};

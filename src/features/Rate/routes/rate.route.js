@@ -7,4 +7,6 @@ router.post("/", verifyUser, controller.index);
 
 router.post("/arr", verifyUser, controller.postArr);
 
+router.get("/", verifyUser, controller.getRates);
+
 module.exports = router;
