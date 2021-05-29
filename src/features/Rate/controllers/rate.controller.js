@@ -38,7 +38,7 @@ module.exports.postArr = async (req, res) => {
         });
         res.send(response.handleSuccess(rates, "Post array rate success"));
     }
-};
+
 
 module.exports.getRates = async (req, res) => {
     const userId = req.user;
