@@ -20,10 +20,10 @@ module.exports.index = async (req, res) => {
 module.exports.postArr = async (req, res) => {
     const rates = req.body.grapValues;
     const userId = req.user;
-    if (rates === undefined){
+    const arrRates = [];
+    if (rates === undefined) {
         res.send(response.handleError("Data is null"));
-    }
-    else{
+    } else {
         rates.forEach((rate) => {
             const heartRateNumber = rate.heartRateNumber;
             const label = rate.label;
@@ -34,11 +34,12 @@ module.exports.postArr = async (req, res) => {
                 createDate: createDate,
                 userId: userId,
             });
+            arrRates.push(newRate);
             RateRepository.addRate(newRate);
         });
-        res.send(response.handleSuccess(rates, "Post array rate success"));
     }
-
+    res.send(response.handleSuccess(arrRates, "Post array rate success"));
+};
 
 module.exports.getRates = async (req, res) => {
     const userId = req.user;
