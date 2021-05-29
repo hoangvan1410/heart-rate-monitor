@@ -139,7 +139,8 @@ module.exports.otp = async (req, res) => {
             }
         }
         else{
-            let isMatchedPassword = AccountRepository.comparePassword(password, account.password)
+            let isMatchedPassword = await AccountRepository.comparePassword(password, account.password)
+            console.log(isMatchedPassword);
             if (isMatchedPassword === false){
                 res.send({
                     data: null,
