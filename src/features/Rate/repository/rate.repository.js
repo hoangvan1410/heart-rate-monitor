@@ -16,7 +16,7 @@ async function getRates(userId, limitDay) {
             createDate: { $gt: getDate(limitDay), $lt: Date.now() },
         });
     } catch (err) {
-        res.status(400).send(err);
+        console.log(err);
     }
 
     return rates;
