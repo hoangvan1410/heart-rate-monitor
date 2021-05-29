@@ -10,7 +10,7 @@ function decodeToken(token) {
     }
     catch(err) {
         console.log(err);
-        return 1
+        return error
     }
     
 }
