@@ -1,6 +1,6 @@
 const Rate = require("../models/Rate");
-const jwt = require("../../Config/security/jwt");
 const RateRepository = require("../repository/rate.repository");
+const response = require("../../Config/responsive/handle");
 
 module.exports.index = async (req, res) => {
     const heartRateNumber = req.body.heartRateNumber;
@@ -14,6 +14,7 @@ module.exports.index = async (req, res) => {
         userId: userId,
     });
     RateRepository.addRate(rate);
+    res.send(response.handleSuccess(rate, "Post rate success"));
 };
 
 module.exports.postArr = async (req, res) => {
@@ -31,11 +32,12 @@ module.exports.postArr = async (req, res) => {
         });
         RateRepository.addRate(newRate);
     });
+    res.send(response.handleSuccess(rates, "Post array rate success"));
 };
 
 module.exports.getRates = async (req, res) => {
     const userId = req.user;
     const limitDay = req.query.limitDay;
     const rates = RateRepository.getRates(userId, limitDay);
-    res.send(rates);
+    res.send(response.handleSuccess(rates, "Get rate success"));
 };
