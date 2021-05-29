@@ -21,32 +21,23 @@ module.exports.postArr = async (req, res) => {
     const rates = req.body.grapValues;
     const userId = req.user;
     const arrRates = [];
-    // rates.forEach(async (rate) => {
-    //     const heartRateNumber = rate.heartRateNumber;
-    //     const label = rate.label;
-    //     const createDate = new Date(rate.createDate);
-    //     const newRate = new Rate({
-    //         heartRateNumber: heartRateNumber,
-    //         label: label,
-    //         createDate: createDate,
-    //         userId: userId,
-    //     });
-    //     arrRates.push(newRate);
-    //     await RateRepository.addRate(newRate);
-    // });
-    for (let i = 0; i < rates.length; i++) {
-        const heartRateNumber = rates[i].heartRateNumber;
-        const label = rates[i].label;
-        const createDate = new Date(rates[i].createDate);
-        const newRate = new Rate({
-            heartRateNumber: heartRateNumber,
-            label: label,
-            createDate: createDate,
-            userId: userId,
-        });
-        arrRates.push(newRate);
-        await RateRepository.addRate(newRate);
+    if (rates === undefined){
+        res.send(response.handleError("Data is null"));
     }
+    else{
+        rates.forEach((rate) => {
+            const heartRateNumber = rate.heartRateNumber;
+            const label = rate.label;
+            const createDate = new Date(rate.createDate);
+            const newRate = new Rate({
+                heartRateNumber: heartRateNumber,
+                label: label,
+                createDate: createDate,
+                userId: userId,
+            });
+            arrRates.push(newRate)
+            RateRepository.addRate(newRate);
+        });
     res.send(response.handleSuccess(arrRates, "Post array rate success"));
 };
 
