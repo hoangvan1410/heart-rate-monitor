@@ -21,8 +21,7 @@ module.exports.postArr = async (req, res) => {
     const rates = req.body.grapValues;
     const userId = req.user;
     const arrRates = [];
-    rates.forEach((rate) => {
-        console.log(rate);
+    rates.forEach(async (rate) => {
         const heartRateNumber = rate.heartRateNumber;
         const label = rate.label;
         const createDate = new Date(rate.createDate);
@@ -33,7 +32,7 @@ module.exports.postArr = async (req, res) => {
             userId: userId,
         });
         arrRates.push(newRate);
-        RateRepository.addRate(newRate);
+        await RateRepository.addRate(newRate);
     });
     res.send(response.handleSuccess(arrRates, "Post array rate success"));
 };
