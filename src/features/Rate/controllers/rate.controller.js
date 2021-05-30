@@ -3,15 +3,18 @@ const RateRepository = require("../repository/rate.repository");
 const response = require("../../Config/responsive/handle");
 
 module.exports.index = async (req, res) => {
+    const grapValues = req.body.grapValues;
     const heartRateNumber = req.body.heartRateNumber;
     const label = req.body.label;
     const createDate = new Date(req.body.createDate);
     const userId = req.user;
     const rate = new Rate({
+        grapValues: grapValues,
         heartRateNumber: heartRateNumber,
         label: label,
         createDate: createDate,
         userId: userId,
+        isSubmitted: true,
     });
     RateRepository.addRate(rate);
     res.send(response.handleSuccess(rate, "Post rate success"));
