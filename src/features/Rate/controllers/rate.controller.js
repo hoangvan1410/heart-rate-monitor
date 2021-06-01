@@ -21,21 +21,24 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.postArr = async (req, res) => {
-    const rates = req.body.grapValues;
+    const rates = req.body.rates;
     const userId = req.user;
     const arrRates = [];
     if (rates === undefined) {
         res.send(response.handleError("Data is null"));
     } else {
         rates.forEach((rate) => {
+            const grapValues = rate.grapValues;
             const heartRateNumber = rate.heartRateNumber;
             const label = rate.label;
             const createDate = new Date(rate.createDate);
             const newRate = new Rate({
+                grapValues: grapValues,
                 heartRateNumber: heartRateNumber,
                 label: label,
                 createDate: createDate,
                 userId: userId,
+                isSubmitted: true,
             });
             arrRates.push(newRate);
             RateRepository.addRate(newRate);
