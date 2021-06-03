@@ -9,12 +9,13 @@ module.exports.signup = async (req, res) => {
     let email = req.body.email.toLowerCase();
     let password = req.body.password;
     let phone = req.body.phoneNumber;
+    let name = req.body.name;
 
     let account = await AccountRepository.findAccountByEmail(email);
     if (account === null) {
         let user = new User({
-            name: "",
-            email: email,
+            name,
+            email,
             address: "",
             phoneNumber: phone,
         });
