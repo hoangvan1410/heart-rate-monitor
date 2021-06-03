@@ -57,3 +57,13 @@ module.exports.getRates = async (req, res) => {
     const rates = await RateRepository.getRates(userId, limitDay);
     res.send(response.handleSuccess(rates, "Get rate success"));
 };
+
+module.exports.deleteArr = async (req, res) => {
+    const local_ids = req.body.local_ids;
+    if (local_ids.length > 0) {
+        local_ids.forEach((local_id) => {
+            RateRepository.deleteRateByLocalId(local_id);
+        });
+    }
+    res.send(response.handleSuccess(null, "Delete rates success"));
+};

@@ -9,4 +9,6 @@ router.post("/arr", verifyUser, controller.postArr);
 
 router.get("/", verifyUser, controller.getRates);
 
+router.post("/delete", verifyUser, controller.deleteArr);
+
 module.exports = router;
