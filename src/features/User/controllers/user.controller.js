@@ -72,8 +72,8 @@ module.exports.login = async (req, res) => {
             });
         }
         else{
-            let isMatchedPassword = AccountRepository.comparePassword(password, account.password)
-            if (isMatchedPassword === null){
+            let isMatchedPassword = await AccountRepository.comparePassword(password, account.password)
+            if (isMatchedPassword === false){
                 res.send({
                     data: null,
                     error_code: 0,
@@ -118,7 +118,8 @@ module.exports.otp = async (req, res) => {
     else{
         if (caseOTP == 1){ // caseOTP = 1: change password (quên pass và reset lại = otp, trường hợp chủ động đổi pass -> dùng token)
             if(otpCode == account.otpCode){
-                await AccountRepository.updatePassword(email, password)
+                let hash = await AccountRepository.hashPassword(password);
+                await AccountRepository.updatePassword(email, hash);
                 let user = await UserRepository.getUserByEmail(email);
                 res.send({
                     data: {
@@ -141,7 +142,6 @@ module.exports.otp = async (req, res) => {
         }
         else{
             let isMatchedPassword = await AccountRepository.comparePassword(password, account.password)
-            console.log(isMatchedPassword);
             if (isMatchedPassword === false){
                 res.send({
                     data: null,

@@ -23,12 +23,15 @@ async function getRates(userId, limitDay) {
 }
 
 function getDate(limitDate) {
-    return new Date(
-        new Date().getTime() - limitDate * 24 * 60 * 60 * 1000
-    ).toLocaleString();
+    return new Date().getTime() - limitDate * 24 * 60 * 60 * 1000;
+}
+
+async function deleteRateByLocalId(local_id) {
+    await Rate.deleteOne({ local_id: local_id });
 }
 
 module.exports = {
     addRate,
     getRates,
+    deleteRateByLocalId,
 };
