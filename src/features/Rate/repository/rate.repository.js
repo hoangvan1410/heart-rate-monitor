@@ -23,9 +23,7 @@ async function getRates(userId, limitDay) {
 }
 
 function getDate(limitDate) {
-    return new Date(
-        new Date().getTime() - limitDate * 24 * 60 * 60 * 1000
-    ).toLocaleString();
+    return new Date().getTime() - limitDate * 24 * 60 * 60 * 1000;
 }
 
 module.exports = {
