@@ -19,10 +19,10 @@ mongoose.connect(
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify: false,
     },
     () => console.log(`connect database success`)
 );
-mongoose.set("useFindAndModify", false);
 
 // router
 app.use("/api/users", userRoute);

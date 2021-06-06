@@ -1,7 +1,6 @@
 const Rate = require("../models/Rate");
 const RateRepository = require("../repository/rate.repository");
 const response = require("../../Config/responsive/handle");
-const { restart } = require("nodemon");
 
 module.exports.index = async (req, res) => {
     const grapValues = req.body.grapValues;
