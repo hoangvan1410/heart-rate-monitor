@@ -22,6 +22,7 @@ mongoose.connect(
     },
     () => console.log(`connect database success`)
 );
+mongoose.set("useFindAndModify", false);
 
 // router
 app.use("/api/users", userRoute);
