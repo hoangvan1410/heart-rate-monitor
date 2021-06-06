@@ -11,4 +11,6 @@ router.get("/", verifyUser, controller.getRates);
 
 router.post("/delete", verifyUser, controller.deleteArr);
 
+router.post("/update/label", verifyUser, controller.updateLabel);
+
 module.exports = router;

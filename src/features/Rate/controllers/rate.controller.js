@@ -1,12 +1,13 @@
 const Rate = require("../models/Rate");
 const RateRepository = require("../repository/rate.repository");
 const response = require("../../Config/responsive/handle");
+const { restart } = require("nodemon");
 
 module.exports.index = async (req, res) => {
     const grapValues = req.body.grapValues;
     const heartRateNumber = req.body.heartRateNumber;
     const label = req.body.label;
-    const createDate = +req.body.createDate;
+    const createDate = Math.round(+req.body.createDate);
     const userId = req.user;
     const local_id = req.body.local_id;
     const rate = new Rate({
@@ -33,7 +34,7 @@ module.exports.postArr = async (req, res) => {
             const grapValues = rate.grapValues;
             const heartRateNumber = rate.heartRateNumber;
             const label = rate.label;
-            const createDate = +rate.createDate;
+            const createDate = Math.round(+rate.createDate);
             const local_id = rate.local_id;
             const newRate = new Rate({
                 grapValues: grapValues,
@@ -66,4 +67,15 @@ module.exports.deleteArr = async (req, res) => {
         });
     }
     res.send(response.handleSuccess(null, "Delete rates success"));
+};
+
+module.exports.updateLabel = async (req, res) => {
+    const id = req.body.remote_id;
+    const newLabel = req.body.label;
+    const result = await RateRepository.updateLabel(id, newLabel);
+    if (result === "update fail") {
+        res.send(response.handleError(null, "update fail"));
+    } else {
+        res.send(response.handleSuccess(null, "update success"));
+    }
 };

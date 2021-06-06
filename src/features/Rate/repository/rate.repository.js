@@ -30,8 +30,28 @@ async function deleteRateByLocalId(local_id) {
     await Rate.deleteOne({ local_id: local_id });
 }
 
+async function updateLabel(id, newLabel) {
+    const rate = await Rate.findById(id).exec();
+    if (rate === null) {
+        return "update fail";
+    } else {
+        await Rate.findOneAndUpdate(
+            { _id: id },
+            { label: newLabel },
+            function (err, result) {
+                if (err) {
+                    return "update fail";
+                } else {
+                    return "update success";
+                }
+            }
+        );
+    }
+}
+
 module.exports = {
     addRate,
     getRates,
     deleteRateByLocalId,
+    updateLabel,
 };
