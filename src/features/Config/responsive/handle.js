@@ -1,6 +1,6 @@
 function handleError(data, message) {
     return {
-        data: null,
+        data: data,
         error_code: 0,
         message: message,
         status: 400,

@@ -33,7 +33,7 @@ async function deleteRateByLocalId(local_id) {
 async function updateLabel(id, newLabel) {
     const rate = await Rate.findById(id).exec();
     if (rate === null) {
-        return false;
+        return "update fail";
     } else {
         await Rate.findOneAndUpdate(
             { _id: id },
