@@ -72,7 +72,7 @@ module.exports.updateLabel = async (req, res) => {
     const id = req.body.remote_id;
     const newLabel = req.body.label;
     const result = await RateRepository.updateLabel(id, newLabel);
-    if (result === "update fail") {
+    if (!result) {
         res.send(response.handleError(null, "update fail"));
     } else {
         res.send(response.handleSuccess(null, "update success"));

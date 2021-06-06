@@ -1,4 +1,4 @@
-function handleError(message) {
+function handleError(data, message) {
     return {
         data: null,
         error_code: 0,
